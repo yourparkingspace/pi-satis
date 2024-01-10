@@ -1,12 +1,8 @@
 {
-  "name": "your-parking-space/packages",
-  "homepage": "https://packages.internal.yourparkingspace.co.uk",
+  "name": "park-insight/packages",
+  "homepage": "https://packages.internal.parkinsight.co.uk",
   "repositories": [
-    { "type": "vcs", "url": "https://github.com/yourparkingspace/microservice-support-php" },
-    { "type": "vcs", "url": "https://github.com/yourparkingspace/cranium-php" },
-    { "type": "vcs", "url": "https://github.com/yourparkingspace/microservice-connect-php" },
-    { "type": "vcs", "url": "https://github.com/yourparkingspace/code-standards-laravel" },
-    { "type": "vcs", "url": "https://github.com/yourparkingspace/products-support" }
+    { "type": "vcs", "url": "https://github.com/yourparkingspace/pi-service-support-php" }
   ],
   "require-all": true
 }
