@@ -2,7 +2,8 @@
   "name": "park-insight/packages",
   "homepage": "https://packages.internal.parkinsight.co.uk",
   "repositories": [
-    { "type": "vcs", "url": "https://github.com/yourparkingspace/pi-service-support-php" }
+    { "type": "vcs", "url": "https://github.com/yourparkingspace/pi-service-support-php" },
+    { "type": "vcs", "url": "https://github.com/yourparkingspace/pi-code-standards-laravel" }
   ],
   "require-all": true
 }
