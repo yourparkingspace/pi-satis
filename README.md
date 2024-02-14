@@ -15,7 +15,7 @@ To use any of the packages hosted at [https://satis.internal.parkinsight.io/](ht
     "repositories": [
         {
             "type": "composer",
-            "url": "https://satis.internal.parkinsight.io/"
+            "url": "https://satis.internal.parkinsight.dev/"
         }
     ]
 }
