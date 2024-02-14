@@ -1,5 +1,5 @@
 {
-  "name": "park-insight/packages",
+  "name": "parkinsight/packages",
   "homepage": "https://satis.internal.parkinsight.io/",
   "repositories": [
     { "type": "vcs", "url": "https://github.com/yourparkingspace/pi-service-support-php" },
