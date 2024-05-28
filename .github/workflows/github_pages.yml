@@ -1,6 +1,17 @@
 name: Publish to GitHub Pages
 
-on: [push, workflow_dispatch, repository_dispatch]
+on:
+  push:
+  workflow_dispatch:
+    inputs:
+      repo_name:
+        description: 'Repository Name'
+        required: true
+        type: string
+      origin_url:
+        description: 'Origin Action URL'
+        required: true
+        type: string
 
 permissions:
   packages: read
@@ -16,6 +27,14 @@ jobs:
     steps:
       - uses: actions/checkout@v3
 
+      - name: Print dispatch event information
+        run: |
+          if [ "${{ github.event_name }}" == "workflow_dispatch" ]; then
+            echo "Triggered by repository: ${{ github.event.inputs.repo_name }}"
+            echo "Origin action URL: ${{ github.event.inputs.origin_url }}"
+          else
+            echo "self-dispatched"
+          fi
       - name: Setup PHP
         uses: shivammathur/setup-php@v2
         with:
