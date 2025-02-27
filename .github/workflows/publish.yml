@@ -1,0 +1,64 @@
+name: Publish to Cloudflare
+
+on:
+  push:
+  workflow_dispatch:
+    inputs:
+      repo_name:
+        description: 'Repository Name'
+        required: true
+        type: string
+      origin_url:
+        description: 'Origin Action URL'
+        required: true
+        type: string
+
+permissions:
+  packages: read
+  contents: read
+  id-token: write
+
+jobs:
+  build:
+    runs-on: [self-hosted, ubuntu-latest, linux]
+    environment: actions
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Print dispatch event information
+        run: |
+          if [ "${{ github.event_name }}" == "workflow_dispatch" ]; then
+            echo "Triggered by repository: ${{ github.event.inputs.repo_name }}"
+            echo "Origin action URL: ${{ github.event.inputs.origin_url }}"
+          else
+            echo "self-dispatched"
+          fi
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.2'
+          tools: composer:2.x
+
+      - name: Composer Install
+        run: composer install
+
+      - name: Compile Satis pages
+        run: vendor/bin/satis build satis.json ./dist
+        env:
+          COMPOSER_AUTH: '{"github-oauth": {"github.com": "${{ secrets.BOT_TOKEN }}"} }'
+
+  publish:
+    runs-on: [self-hosted, ubuntu-latest, linux]
+    needs: build
+    steps:
+      - name: Deploy to Cloudflare
+        id: deployment
+        uses: cloudflare/pages-action@v1
+        with:
+          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          projectName: satis.internal.parkinsight.dev 
+          directory: ./dist
+          gitHubToken: ${{ secrets.GITHUB_TOKEN }}
+
