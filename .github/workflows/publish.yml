@@ -34,6 +34,7 @@ jobs:
           else
             echo "self-dispatched"
           fi
+
       - name: Setup PHP
         uses: shivammathur/setup-php@v2
         with:
@@ -52,6 +53,9 @@ jobs:
     runs-on: [self-hosted, ubuntu-latest, linux]
     needs: build
     steps:
+      - name: Setup Node
+        uses: actions/setup-node@v4
+
       - name: Deploy to Cloudflare
         id: deployment
         uses: cloudflare/wrangler-action@v3
