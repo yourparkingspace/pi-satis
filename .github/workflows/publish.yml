@@ -20,7 +20,7 @@ permissions:
 
 jobs:
   build:
-    runs-on: [self-hosted, ubuntu-latest, linux]
+    runs-on: [ubuntu-latest, linux]
     environment: actions
 
     steps:
@@ -36,7 +36,7 @@ jobs:
           fi
 
       - name: Setup PHP
-        uses: shivammathur/setup-php@more-verbose
+        uses: shivammathur/setup-php@v2
         with:
           php-version: '8.2'
           tools: composer:2.x
@@ -54,7 +54,7 @@ jobs:
           cp -r ./public/* ./dist
 
   publish:
-    runs-on: [self-hosted, ubuntu-latest, linux]
+    runs-on: [ubuntu-latest, linux]
     needs: build
     steps:
       - name: Setup Node
