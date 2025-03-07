@@ -48,6 +48,10 @@ jobs:
         run: vendor/bin/satis build satis.json ./dist
         env:
           COMPOSER_AUTH: '{"github-oauth": {"github.com": "${{ secrets.BOT_TOKEN }}"} }'
+      
+      - name: Copy public -> dist
+        run: |
+          cp -r ./public/* ./dist
 
   publish:
     runs-on: [self-hosted, ubuntu-latest, linux]
