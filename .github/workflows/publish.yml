@@ -55,6 +55,8 @@ jobs:
     steps:
       - name: Setup Node
         uses: actions/setup-node@v4
+        with:
+          cache: 'npm'
 
       - name: Deploy to Cloudflare
         id: deployment
