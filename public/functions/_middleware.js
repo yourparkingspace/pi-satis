@@ -1,7 +1,7 @@
 export async function onRequest(context) {
     const credentials = parse(context.request.headers.get("Authorization"))
 
-    if (!credentials || (credentials.username != "packages" && credentials.password != env.PASSWORD)) {
+    if (!credentials || (credentials.username != "packages" && credentials.password != context.env.PASSWORD)) {
         return unauthorized("Authentication required.")
     }
 
